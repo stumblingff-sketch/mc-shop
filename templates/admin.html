@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .layout-grid { display: grid; gap: 30px; grid-template-columns: 1fr; }
+        @media (min-width: 900px) { .layout-grid { grid-template-columns: 1fr 1fr; } }
+        /* Style to make labels visible */
+        .stat-label { font-size: 13px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    
+    <!-- NAVBAR (Fixed "ADMIN PANEL" Color) -->
+    <nav class="navbar">
+        <a href="/admin" class="brand">ADMIN <span>PANEL</span></a>
+        <a href="/" style="color: #aaa; font-size: 14px;"><i class="fas fa-sign-out-alt"></i> Exit</a>
+    </nav>
+
+    <div class="dashboard-container">
+        
+        <!-- SYSTEM STATS (Fixed Labels & Icons) -->
+        <div class="section-header"><i class="fas fa-tachometer-alt" style="color: #00bfff;"></i> Live Performance</div>
+        
+        <div class="stats-grid">
+            <!-- Online Status -->
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-wifi"></i></div>
+                <div class="stat-label">Server Status</div>
+                <div class="big-number status-online">Online</div>
+            </div>
+
+            <!-- CPU Usage -->
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                <div class="stat-label">CPU Usage</div>
+                <div class="big-number" id="cpu-text">{{ cpu_usage }}%</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="cpu-bar" style="width: {{ cpu_usage }}%;"></div>
+                </div>
+            </div>
+
+            <!-- RAM Usage -->
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-memory"></i></div>
+                <div class="stat-label">Memory Usage</div>
+                <div class="big-number" id="ram-text">{{ ram_usage }}%</div>
+                <div class="progress-container">
+                    <div class="progress-bar green" id="ram-bar" style="width: {{ ram_usage }}%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layout-grid">
+            
+            <!-- FORM 1: ADD PRODUCT -->
+            <div>
+                <div class="section-header"><i class="fas fa-plus-circle" style="color: #00e676;"></i> Add Store Item</div>
+                <div class="card">
+                    <form action="/admin" method="POST">
+                        <input type="hidden" name="form_type" value="product">
+                        
+                        <div class="input-group">
+                            <label class="input-label">Category Type</label>
+                            <select name="category" class="dark-input">
+                                <option value="rank">Rank</option>
+                                <option value="coin">Coins</option>
+                                <option value="tag">Chat Tag</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label">Item Name</label>
+                            <input type="text" name="name" class="dark-input" placeholder="e.g. MVP+ or 1000 Coins" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label">Image URL</label>
+                            <input type="text" name="image_url" class="dark-input" placeholder="https://...">
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="input-group">
+                                <label class="input-label">Price ($)</label>
+                                <input type="number" step="0.01" name="price" class="dark-input" placeholder="0.00" required>
+                            </div>
+                            
+                            <!-- MORE COLORS ADDED HERE -->
+                            <div class="input-group">
+                                <label class="input-label">Glow Color</label>
+                                <select name="color_hex" class="dark-input">
+                                    <option value="#00bfff">Cyan Blue</option>
+                                    <option value="#ffeb3b">Gold / Yellow</option>
+                                    <option value="#ff5252">Red</option>
+                                    <option value="#00e676">Bright Green</option>
+                                    <option value="#e040fb">Purple</option>
+                                    <option value="#ff9100">Orange</option>
+                                    <option value="#ff4081">Pink</option>
+                                    <option value="#ffffff">White</option>
+                                    <option value="#aaaaaa">Gray</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label">Description</label>
+                            <textarea name="description" class="dark-input" placeholder="Item details..." rows="2"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Add Item</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- FORM 2: ADD VOTE LINK -->
+            <div>
+                <div class="section-header"><i class="fas fa-vote-yea" style="color: #ffeb3b;"></i> Add Vote Link</div>
+                <div class="card">
+                    <form action="/admin" method="POST">
+                        <input type="hidden" name="form_type" value="vote">
+                        <div class="input-group">
+                            <label class="input-label">Site Name</label>
+                            <input type="text" name="site_name" class="dark-input" placeholder="e.g. PlanetMinecraft" required>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Vote URL</label>
+                            <input type="text" name="link_url" class="dark-input" placeholder="https://..." required>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Reward Description</label>
+                            <input type="text" name="reward_desc" class="dark-input" placeholder="e.g. 1 Diamond Key">
+                        </div>
+                        <button type="submit" class="btn-submit" style="background: linear-gradient(135deg, #ff5252, #d50000);">Add Link</button>
+                    </form>
+
+                    <!-- Active Vote Links List -->
+                    <div style="margin-top: 30px;">
+                        <label class="input-label">Active Vote Sites</label>
+                        {% for link in vote_links %}
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #222; border-radius: 8px; margin-bottom: 5px; border: 1px solid #333;">
+                            <span style="font-weight: bold;">{{ link.site_name }}</span>
+                            <a href="/admin/delete_vote/{{ link.id }}" style="color: #ff5252;"><i class="fas fa-trash"></i></a>
+                        </div>
+                        {% else %}
+                        <p style="color: #666; font-size: 12px;">No links added.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PRODUCT LIST TABLE -->
+        <div style="margin-top: 50px;">
+            <div class="section-header"><i class="fas fa-list" style="color: #aaa;"></i> Active Store Items</div>
+            <div class="table-container">
+                <table class="rank-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in ranks %}
+                        <tr>
+                            <td><span class="rank-badge">{{ item.category|upper }}</span></td>
+                            <td style="font-weight: 600; color: {{ item.color_hex }};">{{ item.name }}</td>
+                            <td>${{ item.price }}</td>
+                            <td>
+                                <a href="/admin/edit/{{ item.id }}" class="action-btn btn-edit"><i class="fas fa-edit"></i></a>
+                                <a href="/admin/delete_rank/{{ item.id }}" class="action-btn btn-delete" onclick="return confirm('Delete this item?');"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Live Stats Script -->
+    <script>
+        setInterval(() => {
+            fetch('/api/stats').then(r => r.json()).then(d => {
+                document.getElementById('cpu-text').innerText = d.cpu + '%'; 
+                document.getElementById('cpu-bar').style.width = d.cpu + '%';
+                document.getElementById('ram-text').innerText = d.ram + '%'; 
+                document.getElementById('ram-bar').style.width = d.ram + '%';
+            });
+        }, 1000);
+    </script>
+</body>
+</html>

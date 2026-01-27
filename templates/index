@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="hero-wrapper" style="background-image: url('{{ config.hero_background }}');">
+    <div class="hero-overlay"></div>
+    <img src="{{ config.logo_url }}" class="server-logo-3d" alt="Logo">
+</div>
+
+<div class="user-bar-container">
+    <div class="user-bar">
+        {% if current_user.is_authenticated %}
+            <img src="https://mc-heads.net/avatar/{{ current_user.ingame_name }}" class="mc-head">
+            <div style="flex: 1;"><div style="font-weight: bold;">{{ current_user.username }}</div><div style="color: #666; font-size: 13px;">{{ current_user.ingame_name }}</div></div>
+            <a href="/logout" class="buy-btn-modern" style="width: auto; background: #333;">Logout</a>
+        {% else %}
+            <img src="https://mc-heads.net/avatar/MHF_Steve" class="mc-head">
+            <div style="flex: 1;"><div style="font-weight: bold;">Guest</div><div style="color: #666; font-size: 13px;">Welcome</div></div>
+            <a href="/login" class="buy-btn-modern" style="width: auto; background: #00bfff;">Login</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container">
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="openTab(event, 'ranks-section')">Ranks</button>
+        <button class="tab-btn" onclick="openTab(event, 'coins-section')">Coins</button>
+        <button class="tab-btn" onclick="openTab(event, 'tags-section')">Tags</button>
+    </div>
+
+    <!-- RANKS -->
+    <div id="ranks-section" class="tab-content active-content">
+        <div class="shop-grid">
+            {% for item in ranks %}
+            <div class="modern-card">
+                <div class="card-image-wrapper"><img src="{{ item.image_url or 'https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c2/Gold_Ingot_JE4_BE2.png' }}" class="rank-img"></div>
+                <div class="card-title" style="color: {{ item.color_hex }};">{{ item.name }}</div>
+                <div class="card-price">{{ item.price }} USD</div>
+                <a href="#" class="buy-btn-modern">Buy</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- COINS -->
+    <div id="coins-section" class="tab-content">
+        <div class="shop-grid">
+            {% for item in coins %}
+            <div class="modern-card">
+                <div class="card-image-wrapper"><img src="{{ item.image_url or 'https://static.wikia.nocookie.net/minecraft_gamepedia/images/1/12/Raw_Gold_JE3_BE1.png' }}" class="rank-img"></div>
+                <div class="card-title" style="color: #ffeb3b;">{{ item.name }}</div>
+                <div class="card-price">{{ item.price }} USD</div>
+                <a href="#" class="buy-btn-modern" style="background: #ffeb3b; color: black;">Purchase</a>
+            </div>
+            {% else %}
+            <p style="text-align: center; color: #666;">No coins listed yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- TAGS -->
+    <div id="tags-section" class="tab-content">
+        <div class="shop-grid">
+            {% for item in tags %}
+            <div class="modern-card">
+                <div class="card-image-wrapper"><img src="{{ item.image_url or 'https://static.wikia.nocookie.net/minecraft_gamepedia/images/a/a4/Name_Tag_JE2_BE2.png' }}" class="rank-img"></div>
+                <div class="card-title" style="color: #ff5252;">{{ item.name }}</div>
+                <div class="card-price">{{ item.price }} USD</div>
+                <a href="#" class="buy-btn-modern" style="background: #ff5252;">Purchase</a>
+            </div>
+            {% else %}
+            <p style="text-align: center; color: #666;">No tags listed yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    function openTab(evt, sectionName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
+        document.getElementById(sectionName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+{% endblock %}
