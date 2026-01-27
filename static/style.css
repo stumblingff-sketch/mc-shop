@@ -1,0 +1,1952 @@
+/* --- 1. FONTS & RESET --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth physics animation */
+}
+
+body {
+    background-color: #050505;
+    /* Subtle background glow spots */
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 191, 255, 0.08) 0%, transparent 25%),
+        radial-gradient(circle at 90% 80%, rgba(0, 230, 118, 0.05) 0%, transparent 25%);
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- 2. GLASS NAVBAR --- */
+.navbar {
+    background: rgba(10, 10, 10, 0.6); /* Semi-transparent */
+    backdrop-filter: blur(20px);         /* The Blur Effect */
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.brand {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.brand span { 
+    color: #00bfff; 
+    text-shadow: 0 0 20px rgba(0, 191, 255, 0.6); /* Neon Glow */
+}
+
+.nav-links a {
+    color: #aaa;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.nav-links a:hover { color: white; }
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 20px;
+    border-radius: 50px;
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.nav-btn:hover {
+    background: #00bfff;
+    border-color: #00bfff;
+    color: black !important;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+}
+
+/* --- 3. CONTAINERS & LAYOUT --- */
+.container, .dashboard-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.section-header {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* --- 4. GLASS CARDS (THE CORE DESIGN) --- */
+.card {
+    background: rgba(25, 25, 25, 0.5);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* --- 5. SHOP PAGE STYLES --- */
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.rank-header {
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rank-title { 
+    font-size: 36px; 
+    font-weight: 800; 
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.rank-badge-tag {
+    position: absolute;
+    top: 10px; right: 10px;
+    font-size: 10px; font-weight: bold;
+    background: rgba(255,255,255,0.1);
+    padding: 4px 8px; border-radius: 4px;
+    color: #ccc;
+}
+
+.rank-desc {
+    color: #999;
+    font-size: 14px;
+    min-height: 50px;
+    line-height: 1.5;
+}
+
+.price-tag {
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+}
+
+.buy-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: #00bfff;
+    color: black;
+    padding: 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0, 191, 255, 0.25);
+}
+.buy-btn:hover {
+    background: white;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+    transform: scale(1.02);
+}
+
+/* --- 6. ADMIN DASHBOARD SPECIFICS --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.card-icon { font-size: 24px; color: #555; margin-bottom: 10px; }
+.big-number { font-size: 42px; font-weight: 700; color: white; letter-spacing: -2px; line-height: 1; }
+.status-online { color: #00e676; text-shadow: 0 0 15px rgba(0, 230, 118, 0.4); }
+
+.progress-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 100px;
+    height: 8px;
+    width: 100%;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 100px;
+    background: #00bfff;
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
+}
+.progress-bar.green { background: #00e676; box-shadow: 0 0 10px rgba(0, 230, 118, 0.6); }
+
+/* --- 7. FORMS & INPUTS --- */
+.input-group { margin-bottom: 20px; }
+.input-label { 
+    display: block; color: #aaa; font-size: 12px; 
+    font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;
+}
+
+.dark-input, select {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.dark-input:focus, select:focus {
+    border-color: #00bfff;
+    outline: none;
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.15);
+}
+
+.btn-submit {
+    width: 100%;
+    background: linear-gradient(135deg, #00e676 0%, #00c853 100%);
+    color: #000;
+    font-weight: 700;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    box-shadow: 0 5px 20px rgba(0, 230, 118, 0.2);
+    font-family: 'Poppins', sans-serif;
+}
+.btn-submit:hover { 
+    filter: brightness(1.1);
+    transform: scale(1.02); 
+    box-shadow: 0 10px 30px rgba(0, 230, 118, 0.4); 
+}
+
+/* --- 8. TABLES --- */
+.table-container { overflow-x: auto; }
+.rank-table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+.rank-table th { text-align: left; color: #777; padding: 15px; font-weight: 600; font-size: 13px; text-transform: uppercase; }
+.rank-table td { 
+    background: rgba(255, 255, 255, 0.03); 
+    padding: 15px; 
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: middle;
+}
+.rank-table tr td:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; border-left: 1px solid rgba(255,255,255,0.05); }
+.rank-table tr td:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; border-right: 1px solid rgba(255,255,255,0.05); }
+
+.rank-badge {
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid currentColor;
+    box-shadow: 0 0 10px currentColor; /* Text color becomes glow color */
+}
+
+/* --- 9. LOGIN PAGE --- */
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Pushes footer down */
+    min-height: 60vh;
+}
+.login-box { width: 100%; max-width: 420px; }
+
+/* --- 10. FOOTER --- */
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #444;
+    font-size: 12px;
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+/* --- RESPONSIVE LAYOUT FIX --- */
+
+/* Create a class for the split layout */
+
+.admin-split-layout {
+
+    display: grid;
+
+    gap: 30px;
+
+    /* Default: Mobile (Stack them vertically) */
+
+    grid-template-columns: 1fr; 
+
+}
+
+/* On Desktop/Laptop (Screens wider than 900px) */
+
+@media (min-width: 900px) {
+
+    .admin-split-layout {
+
+        /* Side by Side: Form gets 350px, Table gets the rest */
+
+        grid-template-columns: 350px 1fr; 
+
+    }
+
+}
+
+/* Fix Table Scrolling on Mobile */
+
+.table-container {
+
+    width: 100%;
+
+    overflow-x: auto; /* Allow side scrolling if table is too big */
+
+    -webkit-overflow-scrolling: touch;
+
+}
+/* --- ACTION BUTTONS (EDIT/DELETE) --- */
+.action-btn {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-edit {
+    background: #ffeb3b; /* Yellow */
+    box-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+}
+.btn-edit:hover { background: #fff176; }
+
+.btn-delete {
+    background: #ff5252; /* Red */
+    box-shadow: 0 0 10px rgba(255, 82, 82, 0.5);
+}
+.btn-delete:hover { background: #ff867c; }
+
+/* Edit Page Wrapper */
+.edit-container {
+    max-width: 600px;
+    margin: 50px auto;
+}
+/* --- ANIMATED BACKGROUND --- */
+@keyframes moveBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Apply to Login/Register Body */
+.auth-bg {
+    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #000000);
+    background-size: 400% 400%;
+    animation: moveBackground 15s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    width: 100%;
+    max-width: 400px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.auth-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    color: white;
+}
+.auth-title span { color: #00bfff; }
+
+.link-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #aaa;
+}
+.link-text a { color: #00bfff; text-decoration: none; font-weight: bold; }
+.link-text a:hover { color: white; }
+/* --- AUTH TOGGLE SWITCH --- */
+.auth-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 50px;
+    padding: 5px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.toggle-btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 700;
+    color: #888;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.toggle-btn.active {
+    background: #00bfff;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+}
+
+/* Hide forms initially */
+.form-box { display: none; animation: fadeIn 0.5s ease; }
+.form-box.active { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* --- DARK NEON ANIMATED BACKGROUND --- */
+@keyframes moveBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.auth-bg {
+    /* Pure Black to Dark Blue Gradient */
+    background: linear-gradient(-45deg, #000000, #0a0a0a, #1a1a1a, #0d1b2a);
+    background-size: 400% 400%;
+    animation: moveBackground 15s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.auth-card {
+    background: rgba(20, 20, 20, 0.6); /* Darker Glass */
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 40px rgba(0, 191, 255, 0.1); /* Slight Cyan Glow */
+    width: 100%;
+    max-width: 400px;
+}
+/* --- RESPONSIVE NAVBAR (ANIMIX STYLE) --- */
+
+/* 1. Default: Hide Hamburger, Show Links */
+.hamburger { display: none; }
+
+/* 2. Mobile View (Phones) */
+@media (max-width: 768px) {
+    
+    /* Hide the normal desktop links */
+    .nav-links { display: none; }
+
+    /* Show the Hamburger Button */
+    .hamburger {
+        display: block;
+        font-size: 24px;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* 3. The Sliding Side Menu (Hidden by default) */
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px; /* Width of the sidebar */
+        height: 100vh;
+        background: #121212; /* Dark background like Animix */
+        border-right: 1px solid #333;
+        z-index: 2000;
+        transform: translateX(-100%); /* Start hidden off-screen */
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 20px;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+    }
+
+    /* Class to slide it in */
+    .mobile-menu-overlay.active {
+        transform: translateX(0);
+    }
+
+    /* Items inside the side menu */
+    .mobile-nav-item {
+        display: flex;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        color: #ccc;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .mobile-nav-item:hover { color: #00bfff; padding-left: 10px; }
+    .mobile-nav-item i { width: 30px; text-align: center; color: #00bfff; }
+
+    /* Login Button in Side Menu */
+    .mobile-login-btn {
+        display: block;
+        background: #00bfff;
+        color: black;
+        text-align: center;
+        padding: 12px;
+        border-radius: 8px;
+        margin-top: 20px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    /* Close Button (X) */
+    .close-menu {
+        font-size: 24px;
+        color: white;
+        margin-bottom: 20px;
+        cursor: pointer;
+        display: block;
+        text-align: right;
+    }
+    
+    /* Overlay Backdrop (Darken the rest of the screen) */
+    .backdrop {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.7);
+        z-index: 1999;
+        display: none;
+    }
+    .backdrop.active { display: block; }
+}
+/* --- HERO SECTION --- */
+.hero-wrapper {
+    position: relative;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 0 20px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), #050505);
+}
+.server-logo-3d {
+    position: relative;
+    z-index: 2;
+    width: 150px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+    animation: float 6s ease-in-out infinite;
+}
+
+/* --- USER PROFILE BOX (The Green Head Box) --- */
+.user-profile-box {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    position: relative;
+    top: -40px; /* Pull it up into the banner slightly */
+    z-index: 10;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.mc-head {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    border: 2px solid #333;
+}
+
+.login-btn-small {
+    background: #333;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+}
+.login-btn-small:hover { background: #555; }
+
+/* --- SPLIT LAYOUT (Sidebar + Content) --- */
+.store-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr; /* Sidebar fixed, content flex */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.category-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    color: #888;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.category-link:hover, .category-link.active {
+    background: rgba(255,255,255,0.05);
+    color: white;
+    border-left: 3px solid #00bfff; /* Or generic server color */
+}
+
+/* Mobile Responsiveness for Store */
+@media (max-width: 900px) {
+    .store-layout { grid-template-columns: 1fr; } /* Stack on mobile */
+    .hero-wrapper { height: 250px; }
+    .server-logo-3d { width: 100px; }
+    .sidebar-nav { display: none; } /* Hide sidebar on mobile for simplicity, or make horizontal */
+}
+/* --- 1. HERO BANNER (The Header Image) --- */
+.hero-wrapper {
+    position: relative;
+    height: 380px; /* Tall like AppleMC */
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 0 0 0; /* Full width */
+    margin-bottom: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Gradient fade at bottom to blend with body */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, #050505 100%);
+}
+
+.server-logo-3d {
+    position: relative;
+    z-index: 2;
+    width: 180px; /* Big Logo */
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.8));
+    animation: float 6s ease-in-out infinite;
+}
+
+/* --- 2. USER PROFILE BAR (Floating Box) --- */
+.user-bar-container {
+    max-width: 1200px;
+    margin: -40px auto 40px auto; /* Pulls it UP into the banner */
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.user-bar {
+    background: #151515;
+    border: 1px solid #252525;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+.mc-head {
+    width: 60px; height: 60px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* --- 3. STORE LAYOUT (Sidebar + Grid) --- */
+.store-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr; /* Sidebar Fixed, Grid Flexible */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 50px 20px;
+}
+
+/* SIDEBAR STYLES */
+.sidebar-title {
+    color: #ff5252; /* Apple Red */
+    font-weight: 800;
+    font-size: 16px;
+    margin-bottom: 15px;
+    padding-left: 15px;
+    border-left: 4px solid #ff5252;
+    text-transform: uppercase;
+}
+
+.category-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 15px;
+    color: #888;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: 0.2s;
+    margin-bottom: 5px;
+}
+
+.category-link i { width: 20px; text-align: center; }
+
+.category-link:hover {
+    background: #202020;
+    color: white;
+}
+
+.category-link.active {
+    background: #202020;
+    color: white;
+}
+
+/* --- 4. MODERN CARDS (Pic 1 Style) --- */
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.modern-card {
+    background: #141414; /* Very Dark Grey */
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s;
+    border: 1px solid transparent;
+}
+
+.modern-card:hover {
+    transform: translateY(-5px);
+    background: #1a1a1a;
+    border-color: #333;
+}
+
+.card-image-wrapper {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.rank-img {
+    max-height: 100%;
+    max-width: 100%;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.card-price {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.buy-btn-modern {
+    display: block;
+    width: 100%;
+    background: #ff5252; /* The Red "Buy" Button */
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.buy-btn-modern:hover {
+    background: #ff7b7b;
+    box-shadow: 0 5px 15px rgba(255, 82, 82, 0.3);
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 900px) {
+    .store-layout { grid-template-columns: 1fr; } /* Stack vertically */
+    .sidebar-nav { display: none; } /* Hide sidebar on mobile */
+    .hero-wrapper { height: 280px; }
+    .server-logo-3d { width: 120px; }
+    .user-bar-container { margin-top: -30px; }
+}
+/* =================================================== */
+/* ===== NEW STYLES (SLIDING SIDEBAR & TABS) ===== */
+/* =================================================== */
+
+
+/* --- 1. SLIDING SIDEBAR (FOR MOBILE) --- */
+
+/* Hide desktop links and show hamburger on mobile */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger {
+        display: block;
+        font-size: 24px;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+/* Hide hamburger on desktop */
+@media (min-width: 769px) {
+    .hamburger { display: none; }
+}
+
+/* The slide-out menu panel (hidden by default) */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background: #121212;
+    border-right: 1px solid #333;
+    z-index: 2000;
+    transform: translateX(-100%); /* Start off-screen */
+    transition: transform 0.3s ease-in-out;
+    padding: 20px;
+    box-shadow: 5px 0 25px rgba(0,0,0,0.5);
+}
+
+/* Class to make the sidebar visible */
+.mobile-menu-overlay.active {
+    transform: translateX(0);
+}
+
+/* Dark background overlay when menu is open */
+.backdrop {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1999;
+    display: none;
+}
+.backdrop.active {
+    display: block;
+}
+
+/* Close button (X) inside the sidebar */
+.close-menu {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 20px;
+    cursor: pointer;
+    text-align: right;
+}
+
+/* Links inside the sidebar */
+.mobile-nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: #ccc;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+.mobile-nav-item i { width: 30px; text-align: center; color: #00bfff; }
+.mobile-nav-item:hover { color: #00bfff; }
+
+/* Login button inside the sidebar */
+.mobile-login-btn {
+    display: block;
+    background: #00bfff;
+    color: black;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+/* --- 2. HORIZONTAL TAB MENU (FOR SHOP PAGE) --- */
+
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 15px 5px;
+    cursor: pointer;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    transition: color 0.3s;
+}
+
+.tab-btn:hover {
+    color: white;
+}
+
+/* Glowing underline for the active tab */
+.tab-btn.active {
+    color: #00bfff; /* Cyan text */
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #00bfff;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.6); /* The glow */
+}
+
+/* Hides the inactive content sections */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Shows the active content section */
+.tab-content.active-content {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 3. MISC ANIMATIONS --- */
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+/* ======================================================== */
+/* ===== NEW APPLEMC STYLE SIDEBAR CSS (REPLACEMENT) ===== */
+/* ======================================================== */
+
+/* --- MOBILE VIEW: HIDE/SHOW BUTTONS --- */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: block; font-size: 24px; color: white; background: none; border: none; cursor: pointer; }
+}
+@media (min-width: 769px) {
+    .hamburger { display: none; }
+}
+
+/* --- The Main Sidebar Panel --- */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px; /* Slightly wider */
+    height: 100vh;
+    background: #1e1e1e; /* AppleMC Dark Grey */
+    z-index: 2000;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 5px 0 30px rgba(0,0,0,0.5);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-menu-overlay.active { transform: translateX(0); }
+
+/* --- Sidebar Header --- */
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+}
+.menu-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ff5252; /* AppleMC Red */
+    margin: 0;
+}
+.close-menu-btn {
+    background: #333;
+    color: #888;
+    border: none;
+    border-radius: 6px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.close-menu-btn:hover { background: #444; color: white; }
+
+/* --- Sidebar Links --- */
+.mobile-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between icon and text */
+    padding: 14px 10px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+}
+.mobile-nav-item:hover { background: #2a2a2a; color: white; }
+.mobile-nav-item.active { color: white; font-weight: bold; }
+.mobile-nav-item i { width: 20px; text-align: center; color: #888; }
+.mobile-nav-item:hover i { color: white; }
+
+/* --- Divider Line --- */
+.hr, .menu-divider {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 15px 0;
+}
+
+/* --- Logged-in User Info Box --- */
+.mobile-user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #2a2a2a;
+    border-radius: 8px;
+}
+.mc-head-small { width: 40px; height: 40px; border-radius: 6px; }
+.mobile-user-info div { display: flex; flex-direction: column; }
+.mobile-user-info small { font-size: 12px; color: #888; }
+
+/* Dark background overlay */
+.backdrop {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1999;
+    display: none;
+}
+.backdrop.active { display: block; }
+/* --- ANIMATED BACKGROUND FOR RULES PAGE --- */
+@keyframes bg-pan {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.animated-bg-page {
+    /* Subtle Dark Blue/Teal Gradient */
+    background: linear-gradient(60deg, #0d1b2a, #1a1a1a, #050505, #1a1a1a);
+    background-size: 300% 300%;
+    animation: bg-pan 20s ease infinite;
+}
+
+/* --- MODERN RULE CARD STYLES --- */
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.rule-card {
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 25px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.rule-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.rule-number {
+    font-size: 28px;
+    font-weight: 800;
+    color: #00bfff; /* Theme's highlight color */
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+    margin-bottom: 10px;
+}
+
+.rule-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 10px 0;
+}
+
+.rule-card p {
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.6;
+    margin: 0;
+}
+/* ========================================= */
+/* ===== BATTLEPIE THEME (Purple/Snow) ===== */
+/* ========================================= */
+
+/* Purple Overlay for Hero */
+.hero-overlay-purple {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(42, 14, 59, 0.6), #180c24); /* Deep Purple Fade */
+}
+
+.battlepie-hero {
+    height: 450px; flex-direction: column; align-items: center; justify-content: center;
+    border-bottom: 5px solid #2a0e3b;
+}
+
+.hero-content { position: relative; z-index: 5; text-align: center; width: 100%; max-width: 1200px; }
+.battlepie-logo { width: 250px; margin-bottom: 20px; }
+
+/* Hero Stats (Online/Discord) */
+.hero-stats { display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; }
+.stat-badge { background: #ffbd2e; color: #000; padding: 5px 15px; border-radius: 50px; font-weight: 800; font-size: 14px; }
+.stat-badge.discord { background: #5865F2; color: #fff; }
+
+/* Floating Guest Box */
+.guest-login-box {
+    position: absolute; top: 20px; right: 20px;
+    background: rgba(0,0,0,0.6); padding: 10px 15px; border-radius: 12px;
+    display: flex; align-items: center; gap: 10px; border: 1px solid #ffbd2e;
+}
+.login-head { width: 40px; height: 40px; border-radius: 6px; }
+.login-text { display: flex; flex-direction: column; text-align: left; }
+.login-label { font-size: 10px; color: #ccc; text-transform: uppercase; }
+.login-link { color: #ffbd2e; font-weight: bold; font-size: 14px; }
+.login-name { color: white; font-weight: bold; }
+
+/* Layout Grid (Left | Center | Right) */
+.battlepie-layout {
+    display: grid; grid-template-columns: 280px 1fr 280px; gap: 30px; margin-top: -50px; position: relative; z-index: 10;
+}
+/* Mobile Stack */
+@media (max-width: 1000px) {
+    .battlepie-layout { grid-template-columns: 1fr; margin-top: 20px; }
+    .hero-wrapper { height: 350px; }
+    .guest-login-box { top: 10px; right: 10px; padding: 5px 10px; }
+}
+
+/* Titles */
+.gold-title { color: #ffbd2e; text-transform: uppercase; font-weight: 800; font-size: 18px; margin-bottom: 15px; border-bottom: 2px solid #2a0e3b; padding-bottom: 10px; }
+
+/* Featured Packages (Left Sidebar) */
+.featured-list { display: flex; flex-direction: column; gap: 10px; }
+.featured-card {
+    background: #241235; border: 1px solid #3d1e57; padding: 10px; border-radius: 8px;
+    display: flex; align-items: center; gap: 10px; transition: 0.2s;
+}
+.featured-card:hover { background: #2f1845; transform: translateX(5px); }
+.featured-img { width: 40px; height: 40px; }
+.featured-info { flex: 1; }
+.featured-name { font-weight: bold; font-size: 14px; }
+.featured-price { color: #ffbd2e; font-size: 12px; }
+.featured-btn { background: #ffbd2e; color: black; padding: 5px 10px; border-radius: 4px; }
+
+.big-shop-btn {
+    display: block; background: #ffbd2e; color: #000; text-align: center;
+    font-weight: 800; padding: 15px; border-radius: 8px; margin-top: 20px;
+}
+
+/* Center Content */
+.welcome-text { background: #180c24; padding: 20px; border-radius: 12px; border: 1px solid #2a0e3b; color: #ccc; line-height: 1.6; margin-bottom: 20px; }
+.welcome-text strong { color: white; }
+
+/* Goal Bar */
+.goal-box { background: #241235; padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #3d1e57; }
+.goal-header { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 5px; font-size: 12px; text-transform: uppercase; color: #aaa; }
+.goal-bar-bg { background: #12091b; height: 12px; border-radius: 10px; overflow: hidden; }
+.goal-bar-fill { background: linear-gradient(90deg, #ffbd2e, #ff9100); height: 100%; }
+
+/* Payment Icons */
+.payment-icons { font-size: 30px; display: flex; gap: 15px; color: #666; justify-content: center; }
+
+/* Widgets (Right Sidebar) */
+.widget-box { background: #180c24; padding: 15px; border-radius: 12px; border: 1px solid #2a0e3b; margin-bottom: 20px; }
+.widget-title { color: #ffbd2e; font-size: 14px; text-transform: uppercase; margin-bottom: 15px; font-weight: 800; }
+.payment-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.payment-head { width: 100%; border-radius: 6px; border: 1px solid #333; }
+
+.top-customer { display: flex; align-items: center; gap: 15px; }
+.top-head { width: 50px; border-radius: 8px; border: 2px solid #ffbd2e; }
+/* --- MOBILE FIX FOR BATTLEPIE HERO --- */
+@media (max-width: 1000px) {
+    /* 1. Stack the main layout columns */
+    .battlepie-layout { 
+        grid-template-columns: 1fr; 
+        margin-top: 0; 
+    }
+
+    /* 2. Fix the Hero Section to adapt height automatically */
+    .battlepie-hero { 
+        height: auto; 
+        min-height: 350px; 
+        padding-top: 60px; /* Space for navbar */
+        padding-bottom: 20px;
+    }
+
+    /* 3. STOP FLOATING the Login Box on mobile */
+    .guest-login-box { 
+        position: relative; /* No longer absolute/floating */
+        top: auto; 
+        right: auto; 
+        margin: 15px auto; /* Center it */
+        width: fit-content;
+        background: rgba(0,0,0,0.8); /* Darker background to read text */
+        border: 1px solid rgba(255, 189, 46, 0.5);
+    }
+
+    /* 4. Adjust Logo Size */
+    .battlepie-logo { 
+        width: 180px; 
+        margin-bottom: 10px; 
+    }
+}
+/* ================================================= */
+/* ===== PURPLE THEME SIDEBAR (BattlePie Update) ===== */
+/* ================================================= */
+
+/* 1. Main Background - Deep Purple Gradient */
+.mobile-menu-overlay {
+    background: linear-gradient(180deg, #180c24 0%, #0d0612 100%); 
+    border-right: 1px solid #3d1e57; /* Purple border */
+    box-shadow: 10px 0 50px rgba(42, 14, 59, 0.5); /* Purple shadow glow */
+}
+
+/* 2. Header Section */
+.mobile-menu-header {
+    border-bottom: 1px solid #3d1e57;
+}
+
+.menu-title {
+    color: #ffbd2e; /* Gold Title */
+    text-shadow: 0 0 10px rgba(255, 189, 46, 0.3);
+}
+
+.close-menu-btn {
+    background: #241235; /* Lighter Purple */
+    color: #fff;
+    border: 1px solid #3d1e57;
+}
+
+/* 3. Navigation Links */
+.mobile-nav-item {
+    color: #d0c0e0; /* Light Purple-Grey Text */
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.mobile-nav-item i {
+    color: #9b72cf; /* Purple Icons */
+}
+
+/* Hover Effect - Glows Purple & Gold */
+.mobile-nav-item:hover {
+    background: #2f1845; 
+    color: #ffbd2e; /* Text turns Gold */
+    box-shadow: 0 0 15px rgba(42, 14, 59, 0.5);
+    transform: translateX(5px);
+}
+
+.mobile-nav-item:hover i {
+    color: #ffbd2e; /* Icons turn Gold */
+}
+
+/* 4. User Info Box */
+.mobile-user-info {
+    background: #241235;
+    border: 1px solid #3d1e57;
+}
+
+.mobile-user-info strong {
+    color: #fff;
+}
+
+.mobile-user-info small {
+    color: #9b72cf;
+}
+
+/* 5. Divider Line */
+.menu-divider {
+    border-top: 1px solid #3d1e57;
+}
+
+/* 6. Login / Logout Buttons */
+.mobile-login-btn {
+    background: #ffbd2e !important; /* Gold Button */
+    color: #000 !important;
+    font-weight: 800;
+}
+/* ========================================= */
+/* ===== VOTE PAGE (BattlePie Theme) ===== */
+/* ========================================= */
+
+.vote-card {
+    background: #241235; /* Deep Purple */
+    border: 1px solid #3d1e57;
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.vote-card:hover {
+    transform: translateY(-7px);
+    border-color: #ffbd2e; /* Gold Border on Hover */
+    box-shadow: 0 15px 40px rgba(42, 14, 59, 0.6);
+}
+
+/* Background Glow Effect */
+.vote-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 5px;
+    background: linear-gradient(90deg, #ffbd2e, #ff9100); /* Gold Top Line */
+}
+
+.vote-icon {
+    font-size: 42px;
+    color: #ffbd2e; /* Gold Icon */
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px rgba(255, 189, 46, 0.4);
+}
+
+.vote-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.vote-reward {
+    color: #d0c0e0; /* Light Purple Text */
+    font-size: 14px;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+.vote-btn {
+    display: block;
+    width: 100%;
+    background: #ffbd2e; /* Gold Button */
+    color: black;
+    font-weight: 800;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.vote-btn:hover {
+    background: #ffca5c; /* Lighter Gold */
+    box-shadow: 0 0 15px rgba(255, 189, 46, 0.5);
+    transform: scale(1.02);
+}
+/* =========================================== */
+/* ===== SHOP PAGE THEME (BattlePie Purple) ===== */
+/* =========================================== */
+
+/* 1. Header Text */
+.shop-header h1 {
+    color: white;
+    font-size: 48px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+.shop-header p {
+    color: #d0c0e0; /* Light Purple */
+    font-size: 16px;
+}
+
+/* 2. Tab Menu - Make Active Tab Gold */
+.tabs-container {
+    border-bottom: 2px solid #3d1e57; /* Purple Line */
+}
+
+.tab-btn.active {
+    color: #ffbd2e; /* Gold Text */
+}
+
+.tab-btn.active::after {
+    background: #ffbd2e; /* Gold Underline */
+    box-shadow: 0 0 20px rgba(255, 189, 46, 0.6); /* Gold Glow */
+}
+
+/* 3. Cards - Purple Background & Gold Buttons */
+.modern-card {
+    background: #241235; /* Deep Purple */
+    border: 1px solid #3d1e57;
+    transition: all 0.2s ease-in-out;
+}
+
+.modern-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: #ffbd2e;
+    box-shadow: 0 10px 30px rgba(42, 14, 59, 0.6);
+}
+
+.card-title {
+    color: white !important; /* Force white, ignore rank color for this theme */
+    font-weight: bold;
+}
+
+.card-price {
+    color: #ffbd2e; /* Gold Price */
+    font-weight: bold;
+}
+
+.buy-btn-modern {
+    background: #ffbd2e; /* Gold "Buy" Button */
+    color: #000;
+    font-weight: 800;
+}
+
+.buy-btn-modern:hover {
+    background: #ffca5c; /* Lighter Gold */
+    box-shadow: 0 0 15px rgba(255, 189, 46, 0.5);
+}
+/* --- SHOPPING CART PAGE --- */
+.cart-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+@media (max-width: 800px) { .cart-layout { grid-template-columns: 1fr; } }
+.cart-item-card { display: flex; align-items: center; background: #180c24; border: 1px solid #2a0e3b; padding: 15px; border-radius: 12px; margin-bottom: 10px; }
+.cart-item-img { width: 50px; height: 50px; margin-right: 15px; }
+.checkout-summary { background: #180c24; border: 1px solid #2a0e3b; padding: 20px; border-radius: 12px; }
+.summary-line { display: flex; justify-content: space-between; margin-bottom: 10px; color: #ccc; }
+.summary-line.total { font-weight: bold; font-size: 20px; color: white; }
+/* ================================================= */
+/* ===== AUTH PAGE THEME (BattlePie Purple) ===== */
+/* ================================================= */
+
+/* 1. The Animated Purple Background */
+.battlepie-auth-bg {
+    background: linear-gradient(135deg, #180c24, #2a0e3b, #180c24, #0d0612);
+    background-size: 400% 400%;
+    animation: bg-pan 20s ease infinite; /* Reusing the bg-pan animation */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* 2. The Purple Glass Card */
+.battlepie-auth-card {
+    background: #241235; /* Deep Purple */
+    border: 1px solid #3d1e57;
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+    animation: float 6s ease-in-out infinite; /* Reusing the float animation */
+}
+
+/* 3. Title - Gold Accent */
+.auth-title { text-align: center; font-size: 32px; font-weight: 800; margin-bottom: 25px; }
+.auth-title span { color: #ffbd2e; text-shadow: 0 0 10px rgba(255, 189, 46, 0.4); }
+
+/* 4. Toggle Switch - Gold Active State */
+.auth-header {
+    background: #180c24;
+    border: 1px solid #3d1e57;
+}
+
+.toggle-btn.active {
+    background: #ffbd2e; /* Gold */
+    color: black;
+    box-shadow: 0 0 15px rgba(255, 189, 46, 0.4);
+}
+
+/* 5. Inputs and Buttons */
+.dark-input {
+    background: #180c24;
+    border: 1px solid #3d1e57;
+    padding: 14px;
+    border-radius: 8px;
+}
+
+.dark-input:focus {
+    border-color: #ffbd2e;
+    box-shadow: 0 0 10px rgba(255, 189, 46, 0.2);
+}
+
+.btn-submit {
+    background: #ffbd2e; /* Gold Button */
+    color: black;
+    font-weight: 800;
+    font-size: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background: #ffca5c;
+    box-shadow: 0 0 15px rgba(255, 189, 46, 0.5);
+}
+/* ================================================= */
+/* ===== MOBILE CART ICON FIX (Final) ===== */
+/* ================================================= */
+
+/* 1. Container - Hidden on PC, Visible on Mobile */
+.mobile-cart-container {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .mobile-cart-container {
+        display: flex;
+        align-items: center;
+        margin-right: 5px; /* Spacing from right edge */
+    }
+}
+
+/* 2. The Cart Icon Button */
+.mobile-cart-link {
+    color: #ffbd2e; /* Gold Icon */
+    font-size: 22px;
+    position: relative; /* Essential for the badge to stick to it */
+    display: inline-block;
+    padding: 5px;
+}
+
+/* 3. The Red Badge (Notification Circle) */
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background-color: #ff5252 !important; /* Force Red */
+    color: white !important;              /* Force White Text */
+    font-size: 10px;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #121212; /* Dark border to separate from icon */
+    z-index: 10;
+    line-height: 1;
+}
+/* =========================================== */
+/* ===== RULES PAGE THEME (BattlePie) ===== */
+/* =========================================== */
+
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.rule-card {
+    background: #241235; /* Deep Purple */
+    border: 1px solid #3d1e57;
+    border-radius: 16px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.rule-card:hover {
+    transform: translateY(-5px);
+    border-color: #ffbd2e; /* Gold Border on Hover */
+    box-shadow: 0 15px 40px rgba(42, 14, 59, 0.6);
+}
+
+/* Gold Number Style */
+.rule-number {
+    font-size: 40px;
+    font-weight: 900;
+    color: rgba(255, 189, 46, 0.1); /* Faded Gold Background */
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 0;
+}
+
+.rule-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffbd2e; /* Gold Title */
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.rule-card p {
+    color: #d0c0e0; /* Light Purple Text */
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+/* ================================================= */
+/* ===== EMPTY STATE FIX (For Recent Payments) ===== */
+/* ================================================= */
+
+.empty-state {
+    grid-column: 1 / -1; /* Make it span the full width */
+    text-align: center;
+    padding: 30px 10px;
+    background: rgba(0, 0, 0, 0.2); /* Slightly darker background */
+    border-radius: 8px;
+    border: 1px dashed rgba(255, 189, 46, 0.2); /* Subtle Gold dashed border */
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.empty-state i {
+    font-size: 24px;
+    color: #444; /* Dark Icon */
+    margin-bottom: 5px;
+}
+
+.empty-state span {
+    font-size: 13px;
+    font-weight: 500;
+    color: #aaa;
+}
+/* ================================================= */
+/* ===== WIDGET FIX (FLEXBOX INSTEAD OF GRID) ===== */
+/* ================================================= */
+
+.widget-box { 
+    background: #180c24; 
+    padding: 20px; /* Increased padding */
+    border-radius: 12px; 
+    border: 1px solid #3d1e57; 
+    margin-bottom: 25px; /* More space between boxes */
+}
+
+.widget-title { 
+    color: #ffbd2e; 
+    font-size: 14px; 
+    text-transform: uppercase; 
+    margin-bottom: 20px; /* More space below title */
+    font-weight: 800; 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Use Flexbox instead of Grid to prevent overlapping */
+.payment-grid { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px; 
+}
+
+.payment-head { 
+    width: calc(25% - 8px); /* 4 heads per row */
+    border-radius: 6px; 
+    border: 1px solid #333; 
+}
+
+/* Fixed Empty State */
+.empty-state {
+    width: 100%; /* Force full width */
+    text-align: center;
+    padding: 40px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 2px dashed rgba(255, 189, 46, 0.2); /* Thicker dashed border */
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.empty-state i {
+    font-size: 28px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.empty-state span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #aaa;
+}
+/* ================================================= */
+/* ===== FINAL EMPTY STATE FIX (NO OVERLAP) ===== */
+/* ================================================= */
+
+/* 1. The Box Design */
+.empty-state-box {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 2px dashed rgba(255, 189, 46, 0.2); /* Gold Dashed Border */
+    border-radius: 8px;
+    padding: 30px 0; /* Vertical breathing room */
+    margin-top: 10px; /* Push away from title */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* 2. The Icon */
+.empty-state-box i {
+    font-size: 24px;
+    color: #666; 
+}
+
+/* 3. The Text */
+.empty-state-box span {
+    font-size: 13px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+/* ======================================= */
+/* ===== MANUAL UPI PAYMENT STYLES ===== */
+/* ======================================= */
+
+.manual-pay-box {
+    background: #12091b;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #3d1e57;
+    margin-top: 20px;
+}
+
+/* QR Code Container */
+.qr-container {
+    text-align: center;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    width: 180px;
+    margin: 0 auto 20px auto;
+}
+
+.qr-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* UPI Copy Box */
+.upi-copy-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.upi-copy-box input {
+    background: #241235;
+    border: 1px solid #3d1e57;
+    color: #ffbd2e; /* Gold Text */
+    padding: 10px;
+    border-radius: 6px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    outline: none;
+}
+
+.copy-btn {
+    background: #ffbd2e;
+    border: none;
+    border-radius: 6px;
+    padding: 0 15px;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+}
+
+/* Payment Instructions */
+.payment-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.step-num {
+    background: #ffbd2e;
+    color: black;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step p {
+    font-size: 13px;
+    color: #ccc;
+    margin: 0;
+}
+
+.step p strong {
+    color: white;
+}
+/* ======================================= */
+/* ===== EMPTY CART STYLES (Fixed) ===== */
+/* ======================================= */
+
+.empty-cart-box {
+    background: #180c24; /* Deep Purple */
+    border: 1px solid #3d1e57;
+    border-radius: 20px;
+    padding: 60px 20px;
+    text-align: center;
+    max-width: 500px; /* Limits width so it doesn't stretch */
+    margin: 0 auto; /* Centers it horizontally */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.empty-cart-box i {
+    font-size: 60px;
+    color: #3d1e57;
+    margin-bottom: 20px;
+}
+
+.empty-cart-box h3 {
+    color: white;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.empty-cart-box p {
+    color: #aaa;
+    margin-bottom: 30px;
+}

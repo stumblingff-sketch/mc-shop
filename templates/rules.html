@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- 1. HERO BANNER -->
+<div class="hero-wrapper" style="background-image: url('{{ config.hero_background }}'); height: 280px;">
+    <div class="hero-overlay-purple"></div>
+    <div style="z-index: 2; text-align: center;">
+        <h1 style="font-size: 48px; font-weight: 800; text-transform: uppercase;">Server Rules</h1>
+        <p style="color: #d0c0e0; font-size: 16px;">Please read carefully. Ignorance is not an excuse.</p>
+    </div>
+</div>
+
+<!-- 2. RULES GRID (10 Rules) -->
+<div class="container" style="margin-top: 40px; padding-bottom: 50px;">
+    
+    <div class="rules-grid">
+
+        <!-- Rule 1 -->
+        <div class="rule-card">
+            <div class="rule-number">01</div>
+            <h3>Be Respectful</h3>
+            <p>Treat all players and staff with respect. Harassment, racism, sexism, and hate speech will result in an immediate ban.</p>
+        </div>
+
+        <!-- Rule 2 -->
+        <div class="rule-card">
+            <div class="rule-number">02</div>
+            <h3>No Hacking</h3>
+            <p>Using hacked clients (Killaura, Fly, X-Ray), auto-clickers, or macros gives an unfair advantage and is strictly prohibited.</p>
+        </div>
+
+        <!-- Rule 3 -->
+        <div class="rule-card">
+            <div class="rule-number">03</div>
+            <h3>No Griefing</h3>
+            <p>Do not destroy builds that do not belong to you. Stealing from claimed land or raiding bases in non-PvP zones is not allowed.</p>
+        </div>
+
+        <!-- Rule 4 -->
+        <div class="rule-card">
+            <div class="rule-number">04</div>
+            <h3>No Spamming</h3>
+            <p>Keep the chat clean. Do not spam messages, use excessive caps, or flood the chat with characters.</p>
+        </div>
+
+        <!-- Rule 5 -->
+        <div class="rule-card">
+            <div class="rule-number">05</div>
+            <h3>No Exploits</h3>
+            <p>Abusing server bugs, glitches, or duplication exploits for personal gain is forbidden. Report any bugs to staff immediately.</p>
+        </div>
+
+        <!-- Rule 6 -->
+        <div class="rule-card">
+            <div class="rule-number">06</div>
+            <h3>No Advertising</h3>
+            <p>Do not advertise other Minecraft servers, Discord links, or websites in the global chat or via private messages.</p>
+        </div>
+
+        <!-- Rule 7 -->
+        <div class="rule-card">
+            <div class="rule-number">07</div>
+            <h3>PvP Rules</h3>
+            <p>Do not combat log (disconnect while fighting) to avoid death. TP-Trapping (teleporting players to kill them) is not allowed.</p>
+        </div>
+
+        <!-- Rule 8 -->
+        <div class="rule-card">
+            <div class="rule-number">08</div>
+            <h3>Appropriate Content</h3>
+            <p>Inappropriate usernames, skins, or building offensive structures/symbols will result in a ban or build removal.</p>
+        </div>
+
+        <!-- Rule 9 -->
+        <div class="rule-card">
+            <div class="rule-number">09</div>
+            <h3>Lag Machines</h3>
+            <p>Do not build large Redstone clocks or AFK farms that intentionally cause server lag. These will be removed without refund.</p>
+        </div>
+
+        <!-- Rule 10 -->
+        <div class="rule-card">
+            <div class="rule-number">10</div>
+            <h3>Listen to Staff</h3>
+            <p>Staff decisions are final. Do not argue with staff in public chat. If you believe a punishment was unfair, open a ticket on Discord.</p>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

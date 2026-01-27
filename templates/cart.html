@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="padding-top: 50px; padding-bottom: 50px; min-height: 60vh;">
+    
+    <div style="text-align: center; margin-bottom: 40px;">
+        <h1 style="font-size: 42px; font-weight: 800;">Shopping Cart</h1>
+        <p style="color: #aaa;">Complete your purchase manually.</p>
+    </div>
+
+    <!-- LOGIC: If items exist, show Grid. If empty, show Centered Box. -->
+    {% if cart_items %}
+    
+        <!-- ACTIVE CART LAYOUT (2 Columns) -->
+        <div class="cart-layout">
+            
+            <!-- Column 1: Items -->
+            <div class="cart-items">
+                {% for item in cart_items %}
+                <div class="cart-item-card">
+                    <img src="{{ item.image_url or 'https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c2/Gold_Ingot_JE4_BE2.png' }}" class="cart-item-img">
+                    <div style="flex: 1;">
+                        <div style="font-weight: bold; color: white;">{{ item.name }}</div>
+                        <div style="font-size: 12px; color: #888;">{{ item.category|upper }}</div>
+                    </div>
+                    <div style="font-weight: bold; font-size: 18px; color: #ffbd2e;">₹{{ item.price }}</div>
+                    <a href="{{ url_for('remove_from_cart', id=item.id) }}" style="color: #ff5252; margin-left: 20px; font-size: 18px;">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Column 2: Payment Box -->
+            <div class="checkout-summary">
+                <h3>Payment Details</h3>
+                <div class="summary-line">
+                    <span>Total Amount</span>
+                    <span style="color: #ffbd2e; font-weight: bold;">₹{{ total }}</span>
+                </div>
+                <hr style="border-color: #3d1e57; margin: 15px 0;">
+
+                <!-- MANUAL PAYMENT UI -->
+                <div class="manual-pay-box">
+                    <p style="font-size: 12px; color: #aaa; text-align: center; margin-bottom: 15px;">Scan to Pay</p>
+                    
+                    <!-- QR Code -->
+                    <div class="qr-container">
+                        <img src="{{ config.upi_qr_url }}" alt="UPI QR Code" class="qr-image">
+                    </div>
+
+                    <!-- UPI ID -->
+                    <div class="upi-copy-box">
+                        <input type="text" value="{{ config.upi_id }}" id="upiInput" readonly>
+                        <button onclick="copyUPI()" class="copy-btn"><i class="fas fa-copy"></i></button>
+                    </div>
+
+                    <!-- Steps -->
+                    <div class="payment-steps">
+                        <div class="step"><span class="step-num">1</span><p>Pay <strong>₹{{ total }}</strong> via UPI.</p></div>
+                        <div class="step"><span class="step-num">2</span><p>Take a <strong>Screenshot</strong>.</p></div>
+                        <div class="step"><span class="step-num">3</span><p>Send it to <strong>Discord</strong>.</p></div>
+                    </div>
+
+                    <a href="https://discord.gg/YOUR_DISCORD_LINK" target="_blank" class="buy-btn-modern" style="background: #5865F2;">
+                        <i class="fab fa-discord"></i> Send Screenshot
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+
+        <!-- EMPTY STATE (Centered Box) -->
+        <div class="empty-cart-box">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Your cart is empty</h3>
+            <p>Looks like you haven't added anything yet.</p>
+            <a href="/shop" class="buy-btn-modern" style="width: auto; padding: 12px 30px; display: inline-block; background: #ffbd2e; color: black;">
+                Browse Store
+            </a>
+        </div>
+
+    {% endif %}
+
+</div>
+
+<script>
+    function copyUPI() {
+        var copyText = document.getElementById("upiInput");
+        copyText.select();
+        navigator.clipboard.writeText(copyText.value);
+        alert("UPI ID Copied: " + copyText.value);
+    }
+</script>
+{% endblock %}

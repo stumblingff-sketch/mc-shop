@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register - {{ config.server_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="battlepie-auth-bg"> <!-- New Background Class -->
+
+    <div class="battlepie-auth-card"> <!-- New Card Class -->
+        
+        <!-- Header -->
+        <h2 class="auth-title">
+            {{ config.server_name.split(' ')[0] }} <span>{{ config.server_name.split(' ')[1] if config.server_name.split(' ')|length > 1 else '' }}</span>
+        </h2>
+
+        <!-- Flash Messages for errors -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div style="background: rgba(255, 82, 82, 0.2); border: 1px solid #ff5252; color: #ff5252; padding: 12px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-size: 14px; font-weight: bold;">
+              {{ messages[0][1] }}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <!-- Toggle Switch -->
+        <div class="auth-header">
+            <div id="tab-login" class="toggle-btn {% if mode == 'login' %}active{% endif %}" onclick="switchTab('login')">Login</div>
+            <div id="tab-register" class="toggle-btn {% if mode == 'register' %}active{% endif %}" onclick="switchTab('register')">Register</div>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div id="form-login" class="form-box {% if mode == 'login' %}active{% endif %}">
+            <form action="/login" method="POST">
+                <div class="input-group"><input type="text" name="username" class="dark-input" placeholder="Username" required></div>
+                <div class="input-group"><input type="password" name="password" class="dark-input" placeholder="Password" required></div>
+                <button type="submit" class="btn-submit">Login Now</button>
+            </form>
+        </div>
+
+        <!-- REGISTER FORM -->
+        <div id="form-register" class="form-box {% if mode == 'register' %}active{% endif %}">
+            <form action="/register" method="POST">
+                <div class="input-group"><input type="email" name="email" class="dark-input" placeholder="Email Address" required></div>
+                <div class="input-group"><input type="text" name="username" class="dark-input" placeholder="Username" required></div>
+                <div class="input-group"><input type="text" name="ingame_name" class="dark-input" placeholder="Minecraft Name" required></div>
+                <div class="input-group"><input type="password" name="password" class="dark-input" placeholder="Password" required></div>
+                <button type="submit" class="btn-submit">Create Account</button>
+            </form>
+        </div>
+
+        <div style="text-align: center; margin-top: 25px;">
+            <a href="/" style="color: #666; font-size: 12px;"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </div>
+
+    <!-- JavaScript to Switch Tabs -->
+    <script>
+        function switchTab(tab) {
+            document.getElementById('tab-login').classList.remove('active');
+            document.getElementById('tab-register').classList.remove('active');
+            document.getElementById('form-login').classList.remove('active');
+            document.getElementById('form-register').classList.remove('active');
+            document.getElementById('tab-' + tab).classList.add('active');
+            document.getElementById('form-' + tab).classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
