@@ -9,10 +9,8 @@
 </head>
 <body>
 
-    <!-- NAVBAR (Top Bar) -->
+    <!-- NAVBAR -->
     <nav class="navbar">
-        
-        <!-- LEFT: Hamburger & Logo -->
         <div style="display: flex; align-items: center; gap: 15px;">
             <button class="hamburger" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
@@ -24,13 +22,11 @@
             </a>
         </div>
         
-        <!-- RIGHT (PC): Desktop Menu -->
         <div class="nav-links">
             <a href="/">Home</a>
             <a href="/shop">Store</a>
             <a href="/vote">Vote</a>
             
-            <!-- Cart Icon (PC) -->
             <a href="{{ url_for('view_cart') }}" class="nav-cart-btn">
                 <i class="fas fa-shopping-cart"></i> Cart ({{ session.get('cart', [])|length }})
             </a>
@@ -39,15 +35,18 @@
                 <span style="color: #666; font-size: 13px; margin: 0 10px;">
                     <i class="fas fa-user"></i> {{ current_user.username }}
                 </span>
-                <a href="/admin" style="color: #00bfff;">Dashboard</a>
-                <a href="/logout" style="color: #ff5252; margin-left: 15px;">Logout</a>
+                
+                <!-- SECURITY CHECK: Only show Dashboard if email is in list -->
+                {% if current_user.email in admin_emails %}
+                    <a href="/admin" style="color: #00bfff;">Dashboard</a>
+                {% endif %}
+
+                <a href="/logout" class="nav-btn" style="background: #ff5252;">Logout</a>
             {% else %}
                 <a href="/login" class="nav-btn">Login</a>
             {% endif %}
         </div>
 
-        <!-- RIGHT (MOBILE): Cart Icon Only -->
-        <!-- RIGHT (MOBILE): Cart Icon Only -->
         <div class="mobile-cart-container">
             <a href="{{ url_for('view_cart') }}" class="mobile-cart-link">
                 <i class="fas fa-shopping-cart"></i>
@@ -56,10 +55,9 @@
                 {% endif %}
             </a>
         </div>
-
     </nav>
 
-    <!-- MOBILE SIDEBAR -->
+    <!-- SIDEBAR -->
     <div class="backdrop" id="menuBackdrop" onclick="toggleMenu()"></div>
     <div class="mobile-menu-overlay" id="sideMenu">
         
@@ -70,10 +68,10 @@
             </span>
         </div>
 
-        <!-- Links -->
         <a href="/" class="mobile-nav-item"><i class="fas fa-home"></i> Home</a>
         
-        {% if current_user.is_authenticated %}
+        <!-- SECURITY CHECK: Mobile Sidebar -->
+        {% if current_user.is_authenticated and current_user.email in admin_emails %}
             <a href="/admin" class="mobile-nav-item" style="color: #ffbd2e; background: rgba(255, 189, 46, 0.1);">
                 <i class="fas fa-tachometer-alt"></i> Dashboard
             </a>
@@ -86,7 +84,6 @@
 
         <hr class="menu-divider">
 
-        <!-- User Info -->
         {% if current_user.is_authenticated %}
             <div class="mobile-user-info">
                 <img src="https://mc-heads.net/avatar/{{ current_user.ingame_name }}" class="mc-head-small">
@@ -104,11 +101,8 @@
         {% endif %}
     </div>
 
-    <!-- Content Injection -->
     {% block content %}{% endblock %}
-
-    <!-- Footer -->
-    <footer>&copy; 2026 {{ config.server_name }}. All rights reserved.</footer>
+    <footer>&copy; 2024 {{ config.server_name }}. All rights reserved.</footer>
 
     <script>
         function toggleMenu() {
@@ -116,6 +110,5 @@
             document.getElementById('menuBackdrop').classList.toggle('active');
         }
     </script>
-
 </body>
 </html>
