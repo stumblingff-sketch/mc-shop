@@ -19,7 +19,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # REPLACE THESE EMAILS WITH YOUR OWN!
 # ==================================================
 ADMIN_EMAILS = [
-    "your_email@gmail.com",  # <--- PUT YOUR LOGIN EMAIL HERE
+    "admin@gmail.com",  # <--- PUT YOUR LOGIN EMAIL HERE
     "rajveer5152@gmail.com"  # Example based on your screenshot
 ]
 
