@@ -20,7 +20,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # ==================================================
 ADMIN_EMAILS = [
     "admin@gmail.com",  # <--- PUT YOUR LOGIN EMAIL HERE
-    "rajveer5152@gmail.com"  # Example based on your screenshot
+    "rajveer5152@gmail.com",
+    "gamerff369336@gmail.com"# Example based on your screenshot
 ]
 
 db.init_app(app)
